@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    body,dl,dd,p,h1,h2,h3,h4,h5,h6{margin:0;}
+    ol,ul,li{margin:0;padding:0;list-style:none;}
+    img{border:none;vertical-align:top;}
+    ul{
+      margin: auto;
+      width: 500px;
+      border: 1px solid #000;
+    }
+    .times li{
+      border-bottom: 1px solid;
+    }
+    .times li h1{
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+<ul class="times">
+  <li>
+    <h1>北京</h1>
+  </li>
+</ul>
+</body>
+<script>
+  var data =[
+      {
+          title:"北京",
+          offset:8
+      },
+      {
+          title:"新西兰",
+          offset:12
+      },
+      {
+          title:"夏威夷",
+          offset:-10
+      },
+      {
+          title:"阿拉斯加",
+          offset:-11
+      }
+  ];
+  var oTimes = document.querySelector(".times");
+  var str ="";
+  var oLi = oTimes.getElementsByTagName("li");
+  for (var i=0;i<data.length;i++){
+      var thisDate =data[i];
+      str +=`<li>
+<h1>${thisDate.title}</h1>
+<p></p>
+</li>`
+  }
+  oTimes.innerHTML =str;
+  setInterval(setDate(),1000);
+  function setDate(){
+      for (var i=0;i<data.length;i++){
+          var thisdate =data[i];
+          var date =new Date(new Date().getTime()-_getTime(8)+_getTime(thisdate.offset));//获取世界时间戳
+          oLi[i].getElementsByTagName("p")[0].innerHTML = date.getFullYear()+"年"+change((date.getMonth()+1))+"月"+change(date.getDate())+"日"+change(date.getHours())+":"+change(date.getMinutes())+":"+change(date.getSeconds());
+  }
+  return setDate;
+  }
+ function _getTime(n) {
+     return n*60*60*1000;
+ }
+setDate();
+  function change(n) {
+     if(n<10){
+         return "0"+n;
+     }else{
+         return n;
+     }
+  }
+  var n=2;
+</script>
+</html>
